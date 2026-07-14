@@ -1,0 +1,11 @@
+name: Feature request
+description: Propose an addition or change
+labels: [enhancement]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Note that surface/behavior changes go through kilden-sdk-spec first — the five server SDKs move together.
+    validations:
+      required: true

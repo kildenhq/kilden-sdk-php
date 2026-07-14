@@ -1,0 +1,24 @@
+name: Bug report
+description: Something in the SDK misbehaves
+labels: [bug]
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      placeholder: kilden-php 0.1.0-alpha.1, PHP 8.3, Laravel 12 (if applicable)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Smallest reproducible snippet if you can. If the SDK diverges from kilden-sdk-spec, say which section — spec divergences are the highest-priority bugs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
