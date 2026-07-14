@@ -1,0 +1,77 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["7.4", "8.0", "8.2", "8.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, curl, zlib
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+      - run: vendor/bin/phpunit --testsuite unit
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+      - run: vendor/bin/phpstan analyse --no-progress
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: freshworkstudio/kilden-sdk-spec
+          path: kilden-sdk-spec
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+          cache-dependency-path: kilden-sdk-spec/mockserver/go.mod
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: json, curl, zlib
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+      - name: start mock capture server
+        run: |
+          (cd kilden-sdk-spec/mockserver && go run . -addr :8091) &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8091/healthz && break
+            sleep 1
+          done
+      - run: vendor/bin/phpunit --testsuite integration
+        env:
+          KILDEN_MOCK_URL: http://127.0.0.1:8091
+          KILDEN_SPEC_DIR: kilden-sdk-spec
+
+  laravel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+        working-directory: packages/laravel
+      - run: vendor/bin/phpunit
+        working-directory: packages/laravel
