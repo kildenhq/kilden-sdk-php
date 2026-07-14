@@ -1,0 +1,38 @@
+{
+    "name": "kilden/kilden-php",
+    "description": "Kilden PHP SDK — server-side events, identity signing and feature flags. Zero dependencies, PHP 7.4+.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["kilden", "analytics", "cdp", "events", "feature-flags"],
+    "homepage": "https://kilden.io",
+    "support": {
+        "docs": "https://docs.kilden.io",
+        "issues": "https://github.com/freshworkstudio/kilden-sdk-php/issues"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "phpstan/phpstan": "^2.0"
+    },
+    "suggest": {
+        "ext-curl": "Preferred HTTP transport",
+        "ext-zlib": "Compresses capture payloads larger than 1 KiB"
+    },
+    "autoload": {
+        "psr-4": { "Kilden\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Kilden\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit --testsuite unit",
+        "test:integration": "phpunit --testsuite integration",
+        "stan": "phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
