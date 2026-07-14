@@ -14,7 +14,8 @@ PHP 7.4+, zero dependencies — it runs on the shared hosting your WordPress
 client lives on and on your Laravel 13 app alike.
 
 ```sh
-composer require kilden/kilden-php
+composer require kilden/kilden-php:@alpha
+# (the @alpha flag goes away at 0.1.0)
 ```
 
 ```php
