@@ -156,7 +156,7 @@ Behavior changes land in the spec first, then here.
 
 ## Community
 
-- [Documentation](https://docs.kilden.io)
+- [Documentation](https://kilden.io/docs)
 - [Discussions](https://github.com/kildenhq/kilden-sdk-php/discussions)
 
 ## License
