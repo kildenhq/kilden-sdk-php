@@ -113,14 +113,16 @@ final class SenderTest extends TestCase
         self::assertCount(2, $transport->requests);
     }
 
-    public function testRetriesCorruptOkBody(): void
+    public function testCorruptBodyOn2xxIsSuccess(): void
     {
+        // SPEC §4.3: any 2xx is success — the body is never parsed, so a
+        // garbage body must not trigger a retry.
         $transport = new FakeTransport([
             new TransportResponse(200, '{"status": <<< garbage'),
-            new TransportResponse(200, '{"status":"ok"}'),
         ]);
         self::assertTrue($this->sender($transport)->sendBatch($this->events()));
-        self::assertCount(2, $transport->requests);
+        self::assertCount(1, $transport->requests);
+        self::assertSame([], $this->sleeps);
     }
 
     public function testDeadlineShortCircuitsRetries(): void

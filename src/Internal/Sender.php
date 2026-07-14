@@ -142,10 +142,10 @@ final class Sender
             return 'retry';
         }
         $status = $response->status();
-        if ($status === 200) {
-            // A 200 with an unparseable body is a corrupt response — retry
-            // (the uuid makes the retry idempotent server-side).
-            return json_decode($response->body()) !== null ? 'ok' : 'retry';
+        if ($status >= 200 && $status < 300) {
+            // Any 2xx is success — the response body is never parsed; the
+            // status is the whole signal (SPEC.md §4.3).
+            return 'ok';
         }
         if ($status === 429 || $status >= 500) {
             return 'retry';
