@@ -5,8 +5,8 @@
 # Kilden PHP SDK
 
 [![Packagist](https://img.shields.io/packagist/v/kilden/kilden-php)](https://packagist.org/packages/kilden/kilden-php)
-[![ci](https://github.com/freshworkstudio/kilden-sdk-php/actions/workflows/ci.yml/badge.svg)](https://github.com/freshworkstudio/kilden-sdk-php/actions/workflows/ci.yml)
-[![license](https://img.shields.io/github/license/freshworkstudio/kilden-sdk-php)](LICENSE)
+[![ci](https://github.com/kildenhq/kilden-sdk-php/actions/workflows/ci.yml/badge.svg)](https://github.com/kildenhq/kilden-sdk-php/actions/workflows/ci.yml)
+[![license](https://img.shields.io/github/license/kildenhq/kilden-sdk-php)](LICENSE)
 
 Server-side PHP SDK for [Kilden](https://kilden.io), the open customer data
 platform: events, identity verification and feature flags from your backend.
@@ -148,7 +148,7 @@ your test suite.
 ## Spec
 
 This SDK implements the
-[Kilden server SDK specification](https://github.com/freshworkstudio/kilden-sdk-spec)
+[Kilden server SDK specification](https://github.com/kildenhq/kilden-sdk-spec)
 (spec version 0.1) and runs its frozen test vectors — including byte-exact
 identity token signatures — against the shared mock capture server in CI.
 Behavior changes land in the spec first, then here.
@@ -156,7 +156,7 @@ Behavior changes land in the spec first, then here.
 ## Community
 
 - [Documentation](https://docs.kilden.io)
-- [Discussions](https://github.com/freshworkstudio/kilden-sdk-php/discussions)
+- [Discussions](https://github.com/kildenhq/kilden-sdk-php/discussions)
 
 ## License
 

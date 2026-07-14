@@ -1,7 +1,7 @@
 # Contributing
 
 Behavior in this SDK is governed by
-[kilden-sdk-spec](https://github.com/freshworkstudio/kilden-sdk-spec): the
+[kilden-sdk-spec](https://github.com/kildenhq/kilden-sdk-spec): the
 spec document, the frozen test vectors, and the mock capture server the
 integration suite runs against. **A PR that changes behavior without a
 matching spec change will be rejected** — five SDKs stay identical only if
@@ -18,7 +18,7 @@ composer stan          # PHPStan, level max, PHP 7.4 target
 The integration suite needs the spec repo's mock server:
 
 ```sh
-git clone https://github.com/freshworkstudio/kilden-sdk-spec ../kilden-sdk-spec
+git clone https://github.com/kildenhq/kilden-sdk-spec ../kilden-sdk-spec
 (cd ../kilden-sdk-spec/mockserver && go run . -addr :8091) &
 composer test:integration
 ```
@@ -38,5 +38,5 @@ follows the same rules, minus the 7.4 floor.
 
 ## Questions
 
-[Discussions](https://github.com/freshworkstudio/kilden-sdk-php/discussions),
+[Discussions](https://github.com/kildenhq/kilden-sdk-php/discussions),
 please — answers there stay searchable.

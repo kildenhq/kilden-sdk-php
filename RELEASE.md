@@ -22,7 +22,7 @@ SemVer. The version lives in `Kilden\Client::VERSION` and the git tag
 
 ## Pending first-time setup (manual, needs the packagist.org account)
 
-- Submit `https://github.com/freshworkstudio/kilden-sdk-php` on
+- Submit `https://github.com/kildenhq/kilden-sdk-php` on
   https://packagist.org/packages/submit as `kilden/kilden-php`, then enable
   the GitHub webhook (Packagist shows the exact steps after submit).
 - `kilden/laravel` lives in `packages/laravel` of this repo. Packagist wants

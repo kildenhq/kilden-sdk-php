@@ -29,6 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `kilden/laravel` (packages/laravel): service provider, `Kilden` facade,
   queued delivery, `POST /kilden/identity` route, `Kilden::fake()`.
 
-[Unreleased]: https://github.com/freshworkstudio/kilden-sdk-php/compare/v0.1.0-alpha.2...HEAD
-[0.1.0-alpha.2]: https://github.com/freshworkstudio/kilden-sdk-php/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
-[0.1.0-alpha.1]: https://github.com/freshworkstudio/kilden-sdk-php/releases/tag/v0.1.0-alpha.1
+[Unreleased]: https://github.com/kildenhq/kilden-sdk-php/compare/v0.1.0-alpha.2...HEAD
+[0.1.0-alpha.2]: https://github.com/kildenhq/kilden-sdk-php/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
+[0.1.0-alpha.1]: https://github.com/kildenhq/kilden-sdk-php/releases/tag/v0.1.0-alpha.1
