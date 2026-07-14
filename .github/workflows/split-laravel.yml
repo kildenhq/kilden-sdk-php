@@ -1,0 +1,41 @@
+# Keeps the read-only kildenhq/kilden-laravel repo (Packagist: kilden/laravel)
+# in sync: every push to main updates its main branch, every v* tag gets a
+# matching tag pointing at the split commit. PRs and issues stay here.
+name: split-laravel
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: push subtree split
+        env:
+          DEPLOY_KEY: ${{ secrets.LARAVEL_SPLIT_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/split_key
+          chmod 600 ~/.ssh/split_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/split_key -o IdentitiesOnly=yes"
+
+          SPLIT_SHA=$(git subtree split --prefix=packages/laravel HEAD)
+          case "$GITHUB_REF" in
+            refs/tags/*)
+              TAG="${GITHUB_REF_NAME}"
+              git push git@github.com:kildenhq/kilden-laravel.git "$SPLIT_SHA:refs/tags/$TAG"
+              ;;
+            *)
+              git push git@github.com:kildenhq/kilden-laravel.git "$SPLIT_SHA:refs/heads/main"
+              ;;
+          esac
