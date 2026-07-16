@@ -12,6 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: tag matches Client::VERSION
+        # composer.json carries no version (Packagist reads the tag), so this
+        # constant is the only version the code knows — it is what SPEC §4.1
+        # puts in the User-Agent. Nothing else compares the two, so a tag bump
+        # without a constant bump ships a package that misreports itself, and
+        # it is invisible: Packagist shows the tag either way. v0.1.0-alpha.3
+        # and v0.1.0-alpha.4 both went out claiming 0.1.0-alpha.2. Fail the
+        # release instead of publishing that.
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          declared=$(sed -n "s/.*const VERSION = '\(.*\)';.*/\1/p" src/Client.php)
+          if [ -z "$declared" ]; then
+            echo "::error::could not read Client::VERSION from src/Client.php"
+            exit 1
+          fi
+          if [ "$tag" != "$declared" ]; then
+            echo "::error::tag $GITHUB_REF_NAME ships Client::VERSION '$declared' — bump the constant in src/Client.php to '$tag'"
+            exit 1
+          fi
+          echo "Client::VERSION '$declared' matches tag $GITHUB_REF_NAME"
       - name: github release
         env:
           GH_TOKEN: ${{ github.token }}
