@@ -7,7 +7,7 @@ on:
 
 jobs:
   unit:
-    runs-on: ubuntu-latest
+    runs-on: kilden-runners
     strategy:
       fail-fast: false
       matrix:
@@ -23,7 +23,7 @@ jobs:
       - run: vendor/bin/phpunit --testsuite unit
 
   static-analysis:
-    runs-on: ubuntu-latest
+    runs-on: kilden-runners
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -34,7 +34,7 @@ jobs:
       - run: vendor/bin/phpstan analyse --no-progress
 
   integration:
-    runs-on: ubuntu-latest
+    runs-on: kilden-runners
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -64,7 +64,7 @@ jobs:
           KILDEN_SPEC_DIR: kilden-sdk-spec
 
   laravel:
-    runs-on: ubuntu-latest
+    runs-on: kilden-runners
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
