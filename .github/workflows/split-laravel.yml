@@ -13,7 +13,8 @@ permissions:
 
 jobs:
   split:
-    runs-on: ubuntu-latest
+    runs-on: kilden-runners
+    container: buildpack-deps:jammy
     steps:
       - uses: actions/checkout@v4
         with:
